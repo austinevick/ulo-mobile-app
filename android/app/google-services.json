@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "276815238473",
+    "project_id": "ulo-mobile-app",
+    "storage_bucket": "ulo-mobile-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:276815238473:android:a39c255a42c110254df698",
+        "android_client_info": {
+          "package_name": "com.example.ulo_mobile_spa"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "276815238473-u46j6m591fanhvu4s9ian82jj3kt8g8b.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.ulo_mobile_spa",
+            "certificate_hash": "727c47c9da66726722655de1f0af9fa8a561cc15"
+          }
+        },
+        {
+          "client_id": "276815238473-74jdee14omtk3n6hqnek74phl495bfd9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyASZj82zwQx73sRTG3Et_S2rFJ_lcgeFzc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "276815238473-74jdee14omtk3n6hqnek74phl495bfd9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
