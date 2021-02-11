@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_fadein/flutter_fadein.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:ulo_mobile_spa/authentication/authentication.dart';
 import 'package:ulo_mobile_spa/database/firestore_database.dart';
 import 'package:ulo_mobile_spa/screens/login_screen.dart';
@@ -8,15 +9,25 @@ import 'package:ulo_mobile_spa/screens/therapist_registration_screen.dart';
 import 'package:ulo_mobile_spa/widgets/login_button.dart';
 import 'package:ulo_mobile_spa/widgets/show_exception_alert_dialog.dart';
 
-class LandingScreen extends StatelessWidget {
+class LandingScreen extends StatefulWidget {
+  @override
+  _LandingScreenState createState() => _LandingScreenState();
+}
+
+class _LandingScreenState extends State<LandingScreen> {
+  bool isLoading = false;
+
   signInAnonymously(BuildContext context) async {
     try {
+      setState(() => isLoading = true);
       User user = await AuthenticationService.signInAnonymously();
       if (user != null) {
         Navigator.of(context).pop();
       }
     } on FirebaseAuthException catch (e) {
       showExceptionAlertDialog(context, title: 'Sign in failed', exception: e);
+    } finally {
+      setState(() => isLoading = false);
     }
   }
 
@@ -33,20 +44,21 @@ class LandingScreen extends StatelessWidget {
               alignment: Alignment.topLeft,
               child: Image.asset(
                 'images/ulo_logo.png',
-                width: 150,
+                width: 130,
+                height: 140,
               ),
             ),
           ),
           Text(
             'Welcome to Ulo Mobile Spa',
-            style: TextStyle(fontSize: 25),
+            style: GoogleFonts.bungee(fontSize: 22),
           ),
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Text(
               'A new way for you to experience a professional massage at home, work or even in a hotel.',
               textAlign: TextAlign.center,
-              style: TextStyle(fontSize: 15),
+              style: GoogleFonts.oleoScript(fontSize: 14),
             ),
           ),
           Center(
@@ -63,10 +75,20 @@ class LandingScreen extends StatelessWidget {
               width: double.infinity,
               buttonColor: Color(0xfff6be00),
               height: 50,
-              child: Text(
-                'Continue as guest',
-                style: TextStyle(color: Colors.white),
-              ),
+              child: isLoading
+                  ? Center(
+                      child: SizedBox(
+                        height: 15,
+                        width: 15,
+                        child: CircularProgressIndicator(
+                          strokeWidth: 2,
+                        ),
+                      ),
+                    )
+                  : Text(
+                      'Continue as guest',
+                      style: TextStyle(color: Colors.white),
+                    ),
             ),
           ),
           Row(
