@@ -11,8 +11,9 @@ class NetworkConnectivityChecker {
       animatedDialog(
           context: context,
           child: CustomAlertDialog(
-            title: 'Internet Error',
-            content: Text('Please check your internet connection'),
+            title: 'Internet Connection',
+            content:
+                Text('Please check your internet connection. Go to settings'),
           ));
     } else if (result == ConnectivityResult.mobile) {
       function();

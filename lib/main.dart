@@ -2,6 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:ulo_mobile_spa/providers/network_provider.dart';
+import 'package:ulo_mobile_spa/screens/auth_screen.dart';
 import 'package:ulo_mobile_spa/screens/login_screen.dart';
 import 'package:ulo_mobile_spa/screens/splash_screen.dart';
 
@@ -20,7 +21,7 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         title: 'Ulo Mobile Spa',
         theme: ThemeData.light(),
-        home: SplashScreen(),
+        home: AuthenticationScreen(),
       ),
     );
   }

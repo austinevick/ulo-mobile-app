@@ -28,7 +28,10 @@ class CustomAlertDialog extends StatelessWidget {
           child: Text('CANCEL'),
         ),
         FlatButton(
-          onPressed: () => SystemSettings.wireless(),
+          onPressed: () {
+            SystemSettings.wireless();
+            Navigator.of(context).pop();
+          },
           child: Text('OK'),
         ),
       ],
