@@ -57,6 +57,14 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  flutter_native_splash: ^0.2.11
+  
+
+flutter_native_splash:
+  color: "#000000"
+  image: images/ulo_logo.png
+  android: true
+  ios: true  
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
