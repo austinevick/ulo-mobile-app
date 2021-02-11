@@ -40,10 +40,12 @@ class Durations {
   final int id;
   final String length;
   final int price;
+  bool isSelected;
   Durations({
     this.id,
     this.length,
     this.price,
+    this.isSelected = false,
   });
   factory Durations.fromMap(Map<String, dynamic> map) {
     return Durations(

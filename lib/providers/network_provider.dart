@@ -51,6 +51,7 @@ class NetworkProvider extends ChangeNotifier {
   Durations selectedDuration;
   setSelectedDuration(Durations duration) {
     selectedDuration = duration;
+    selectedDuration.isSelected = !selectedDuration.isSelected;
     notifyListeners();
   }
 
