@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:scroll_app_bar/scroll_app_bar.dart';
+import 'package:ulo_mobile_spa/authentication/authentication.dart';
 import 'package:ulo_mobile_spa/database/firestore_database.dart';
 import 'package:ulo_mobile_spa/models/booking.dart';
 import 'package:ulo_mobile_spa/providers/network_provider.dart';
@@ -23,8 +24,7 @@ class ClientInformationScreen extends StatefulWidget {
 }
 
 class _ClientInformationScreenState extends State<ClientInformationScreen> {
-  final firstNameController = new TextEditingController();
-  final lastNameController = new TextEditingController();
+  final nameController = new TextEditingController();
   final homeAdressController = new TextEditingController();
   final emailController = new TextEditingController();
   final postalCodeController = new TextEditingController();
@@ -52,6 +52,16 @@ class _ClientInformationScreenState extends State<ClientInformationScreen> {
         title,
         style: GoogleFonts.aclonica(fontSize: 16),
       );
+  @override
+  void initState() {
+    filluserData();
+    super.initState();
+  }
+
+  filluserData() {
+    final userData = AuthenticationService.currentUser;
+    emailController.text = userData.email;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -72,13 +82,8 @@ class _ClientInformationScreenState extends State<ClientInformationScreen> {
                       children: [
                         TextInputField(
                           autofillHints: [AutofillHints.name],
-                          controller: firstNameController,
-                          hintText: 'First Name',
-                        ),
-                        TextInputField(
-                          autofillHints: [AutofillHints.familyName],
-                          controller: lastNameController,
-                          hintText: 'Last Name ',
+                          controller: nameController,
+                          hintText: 'full Name',
                         ),
                         TextInputField(
                             controller: homeAdressController,
@@ -97,19 +102,10 @@ class _ClientInformationScreenState extends State<ClientInformationScreen> {
                             readOnly: true,
                             hintText: 'Home Address'),
                         TextInputField(
-                            textInputType: TextInputType.emailAddress,
-                            autofillHints: [AutofillHints.email],
-                            controller: emailController,
-                            hintText: 'Email Address ',
-                            validator: (value) {
-                              Pattern pattern =
-                                  r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
-                              RegExp regex = new RegExp(pattern);
-                              if (!regex.hasMatch(value))
-                                return 'Enter a valid email';
-                              else
-                                return null;
-                            }),
+                          readOnly: true,
+                          textInputType: TextInputType.emailAddress,
+                          controller: emailController,
+                        ),
                         TextInputField(
                           autofillHints: [AutofillHints.postalCode],
                           controller: postalCodeController,
@@ -213,7 +209,7 @@ class _ClientInformationScreenState extends State<ClientInformationScreen> {
                         therapist: booking.selectedtherapist.name,
                         duration: booking.selectedDuration.length,
                         time: booking.availability.displayValue,
-                        firstName: firstNameController.text,
+                        fullName: nameController.text,
                         street: homeAdressController.text,
                         date: widget.date,
                         pet: currentPet));

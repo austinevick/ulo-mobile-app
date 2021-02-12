@@ -87,6 +87,7 @@ class UserDashboardScreen extends StatelessWidget {
                   color: Colors.red,
                   text: 'Logout',
                 ),
+                Text(AuthenticationService.currentUser.toString())
               ],
             ),
           ),

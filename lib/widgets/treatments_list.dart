@@ -24,7 +24,8 @@ class TreatmentList extends StatelessWidget {
                       Expanded(
                         flex: 6,
                         child: Padding(
-                          padding: const EdgeInsets.all(4.0),
+                          padding:
+                              const EdgeInsets.only(left: 4, bottom: 4, top: 4),
                           child: Material(
                             elevation: 8,
                             borderRadius: BorderRadius.circular(8),

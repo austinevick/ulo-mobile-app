@@ -2,6 +2,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:ulo_mobile_spa/authentication/authentication.dart';
+import 'package:ulo_mobile_spa/database/firestore_database.dart';
+import 'package:ulo_mobile_spa/models/users.dart';
 import 'package:ulo_mobile_spa/widgets/login_button.dart';
 import 'package:ulo_mobile_spa/widgets/show_exception_alert_dialog.dart';
 import 'package:ulo_mobile_spa/widgets/text_input_field.dart';
@@ -43,6 +45,10 @@ class _LoginScreenState extends State<LoginScreen> {
       } else {
         user = await AuthenticationService.createUserWithEmailAndPassword(
             emailController.text, passwordController.text);
+        final userData = new UserData(
+            displayName: nameController.text, email: emailController.text);
+
+        await FirestoreDatabase.saveUsersData(userData);
       }
       if (user != null) {
         Navigator.of(context).pop();
@@ -208,7 +214,7 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   buildNameForm() => TextInputField(
-        textInputType: TextInputType.emailAddress,
+        textInputType: TextInputType.name,
         obscureText: false,
         onEditingComplete: () {
           FocusScope.of(context).requestFocus(emailFocusNode);
@@ -227,6 +233,7 @@ class _LoginScreenState extends State<LoginScreen> {
   /////******************************************************//////
 
   buildEmailForm() => TextInputField(
+      textInputType: TextInputType.emailAddress,
       obscureText: false,
       onChanged: (email) {
         setState(() {});
@@ -243,6 +250,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
   /////*********************************************************//////
   buildPasswordForm() => TextInputField(
+        textInputType: TextInputType.visiblePassword,
         controller: passwordController,
         validator: (value) =>
             value.length < 6 ? 'Character must be at least 6 length' : null,
