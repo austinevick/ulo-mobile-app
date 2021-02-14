@@ -16,8 +16,8 @@ class _TherapistRegistrationScreenState
     'weekdays',
     'Weekends',
     'Mornings',
-    'Afternoon',
-    'Evening'
+    'Afternoons',
+    'Evenings'
   ];
   var selectedDays = 'Weekdays';
   @override
